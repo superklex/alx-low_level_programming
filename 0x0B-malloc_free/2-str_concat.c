@@ -1,54 +1,65 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * str_concat - copy string and manipulate
- * @s1: buffers into allocated memory
- * @s2: buffers into allocated memory
- * Return: returns string already manipulated
+ * _strlen - Swaps integers wih pointers.
+ *
+ * @s: is a pointer to a char
+ *
+ * Return: Always 0.
  */
+int _strlen(char *s)
+{
+int i = 0;
+
+while (*(s + i) != '\0')
+	i++;
+
+return (i);
+}
+
+
+/**
+ * str_concat - Concatenates 2 strings..
+ *
+ * @s1: First string.
+ * @s2: Second string.
+ *
+ * Return: Returns the created array.
+**/
 
 char *str_concat(char *s1, char *s2)
 {
-	int cnt = _strlen(s1) + _strlen(s2);
-	int i = 0;
-	char *str = malloc(cnt + 1);
 
-	if (!s1 || !s2 || !str)
-		return (0);
+int i, j, size1, size2, totSize;
+char *ar;
 
-	for (; i < cnt; i++)
-	{
-		if (i < _strlen(s1))
-			str[i] = s1[i];
-		else if (i >= _strlen(s1) && *s2 != 0)
-		{
-			str[i] = *s2;
-			s2++;
-		}
-	}
+if (s1 == NULL)
+	s1 = "";
+if (s2 == NULL)
+	s2 = "";
 
-	str[i] = 0;
+size1 = _strlen(s1);
+size2 = _strlen(s2);
+totSize = (size1 + size2)+1;
+ar = malloc(totSize *sizeof(char));
 
-	return (str);
-}
-
-/**
- * _strlen - counts length of a sting or char pointer
- * @s: accept user input
- * Return: always return legnth counted
- */
-
-int _strlen(char *s)
+if (ar == NULL)
+	return (NULL);
+else
 {
-	int count = 0;
+for (i = 0; i < size1; i++)
+	ar[i] = s1[i];
 
-	if (!s)
-		return (0);
-
-	while (*s != '\0')
-	{
-		count++;
-		s++;
-	}
-	return (count);
+for (j = 0; j < size2; j++)
+{
+	ar[i] = s2[j];
+	i++;
 }
+ar[i + 1] = '\0';
+return (ar);
+}
+
+}
+
