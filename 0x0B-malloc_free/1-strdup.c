@@ -1,54 +1,31 @@
+#include <stdlib.h>
 #include "main.h"
 
 /**
- * str_concat - copy string and manipulate
- * @s1: buffers into allocated memory
- * @s2: buffers into allocated memory
- * Return: returns string already manipulated
- */
+ * _strdup - Entry point
+ *@str: string we need to duplicate
+ *
+ * Return: Return success.
+**/
 
-char *str_concat(char *s1, char *s2)
+char *_strdup(char *str)
 {
-	int cnt = _strlen(s1) + _strlen(s2);
-	int i = 0;
-	char *str = malloc(cnt + 1);
+char *a;
+int i, c;
 
-	if (!s1 || !s2 || !str)
-		return (0);
+if (str == NULL)
+return (NULL);
 
-	for (; i < cnt; i++)
-	{
-		if (i < _strlen(s1))
-			str[i] = s1[i];
-		else if (i >= _strlen(s1) && *s2 != 0)
-		{
-			str[i] = *s2;
-			s2++;
-		}
-	}
+for (i = 0; str[i] != '\0'; i++)
+;
 
-	str[i] = 0;
+a = malloc(i * sizeof(*a) + 1);
+if (a == NULL)
+return (NULL);
 
-	return (str);
-}
+for (c = 0; c < i; c++)
+a[c] = str[c];
+a[c] = '\0';
 
-/**
- * _strlen - counts length of a sting or char pointer
- * @s: accept user input
- * Return: always return legnth counted
- */
-
-int _strlen(char *s)
-{
-	int count = 0;
-
-	if (!s)
-		return (0);
-
-	while (*s != '\0')
-	{
-		count++;
-		s++;
-	}
-	return (count);
+return (a);
 }
